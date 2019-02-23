@@ -80,12 +80,13 @@ export default {
 
       const transOwners = await deed.methods.owners().call();
       console.log(transOwners);
+      const forSale = await deed.methods.forSale().call();
       this.record = {
         owners: transOwners.owners,
         date: transOwners.date,
         lawyers: transOwners.lawyers,
         registrar: transOwners.registar,
-        forSale: true
+        forSale: forSale
       }
     },
   },
