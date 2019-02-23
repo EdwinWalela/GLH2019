@@ -6,6 +6,7 @@
 
 <script>
 import Web3 from '@/util/web3';
+
 export default {
   name: 'App',
   data() {
@@ -20,7 +21,7 @@ export default {
     },
   },
   created() {
-    this.loadMeta();  
-  }
+    this.loadMeta();
+  },
 };
 </script>

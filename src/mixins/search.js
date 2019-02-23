@@ -17,14 +17,14 @@ export default {
       );
 
       const transOwners = await deed.methods.owners().call();
-      const forSale = await deed.methods.forSale().call();
+      const transfer = await deed.methods.transfer().call();
       this.record = {
         owners: transOwners.owners,
         date: transOwners.date,
         lawyers: transOwners.lawyers,
         registrar: transOwners.registar,
-        forSale,
         ownerAddress: transOwners.ownerAddress,
+        transfer,
       };
     },
   },

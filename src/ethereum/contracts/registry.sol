@@ -92,6 +92,7 @@ contract Deed{
     uint public approxArea;
     uint public regMapSheetNo;
     
+    bool public transfer;
     bool public forSale;
     Ownership public owners;
     Ownership[] private prevOwners;
@@ -139,7 +140,7 @@ contract Deed{
         // ensure no encumbarance
         // ensure owner
         // ensure listed
-        
+        transfer = true;
         TransferRequest memory newRequest = TransferRequest({
             to:_to,
             toAddress:_toAddress,

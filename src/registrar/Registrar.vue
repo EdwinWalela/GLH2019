@@ -81,8 +81,5 @@ export default {
       this.$router.push({ name: 'addrecord' });
     },
   },
-  async created() {
-    await this.loadMeta();
-  },
 };
 </script>

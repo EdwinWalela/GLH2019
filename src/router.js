@@ -14,6 +14,7 @@ import AddLandRecord from '@/registrar/components/AddLandRecord.vue';
 
 import Client from '@/clients/Client.vue';
 import UserLandRecord from '@/clients/components/UserLandRecord.vue';
+import UserTransferRequest from '@/clients/components/UserTransferRequest.vue';
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
           path: 'landrecord',
           name: 'landrecord',
           component: UserLandRecord,
+        },
+        {
+          path: 'transferrequest',
+          name: 'transferrequest',
+          component: UserTransferRequest,
         },
       ],
     },

@@ -46,8 +46,9 @@
 
           </v-list>
         </v-card-text>
-        <v-card-actions v-if="!record.forSale">
+        <v-card-actions>
           <v-btn block color="green" @click="listLand">List for Sale</v-btn>
+          <v-btn block color="green" @click="createTransferRequest"> Transfer</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -72,7 +73,7 @@ export default {
   },
   methods: {
     async listLand() {
-      console.log('List Land')
+      console.log('List Land');
       const deedAddress = await bank.methods.lookUp(this.titleNumber).call();
       const deed = await new web3.eth.Contract(
         JSON.parse(compileDeed.interface),
@@ -80,8 +81,13 @@ export default {
       );
       const sth = await deed.methods.listProperty().send({
         from: this.$store.state.account[0],
-        gas: '5000000'
+        gas: '5000000',
       });
+
+      console.log(sth);
+    },
+    createTransferRequest() {
+      this.$router.push({ name: 'transferrequest' });
     },
   },
   mixins: [
