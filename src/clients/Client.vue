@@ -63,7 +63,7 @@ export default {
   methods: {
     searchLand() {
       console.log('Searching land');
-      this.$router.push({ name: 'landrecord' });
+      this.$router.push({ name: 'landrecord', params: { titleNumber: this.search } });
     },
   },
 };

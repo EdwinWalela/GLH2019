@@ -26,6 +26,9 @@ export default new Router({
       component: Client,
       children: [
         {
+          path: '/',
+        },
+        {
           path: 'landrecord',
           name: 'landrecord',
           component: UserLandRecord,

@@ -13,21 +13,14 @@
               <v-list-tile-title>
                 Title Number
               </v-list-tile-title>
-              <v-list-tile-sub-title>{{ record.titleNo }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>111</v-list-tile-sub-title>
             </v-list-tile>
 
             <v-list-tile>
               <v-list-tile-title>
                 Owner Address
               </v-list-tile-title>
-              <v-list-tile-sub-title>{{ record.ownAddress }}</v-list-tile-sub-title>
-            </v-list-tile>
-
-            <v-list-tile>
-              <v-list-tile-title>
-                Sheet Number
-              </v-list-tile-title>
-              <v-list-tile-sub-title>{{ record.sheetNo }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{ record.ownerAddress }}</v-list-tile-sub-title>
             </v-list-tile>
 
             <v-list-tile>
@@ -48,7 +41,7 @@
               <v-list-tile-title>
                 Date
               </v-list-tile-title>
-              <v-list-tile-sub-title>{{ date }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{ record.date }}</v-list-tile-sub-title>
             </v-list-tile>
 
           </v-list>
@@ -64,34 +57,19 @@
 </template>
 
 <script>
-import axios from 'axios';
-import moment from 'moment';
+import searchMixin from '@/mixins/search';
 
 export default {
   name: 'UserLandRecord',
   data() {
     return {
       loading: true,
-      record: null,
-      moment,
+      titleNumber: null || this.$route.params.titleNumber,
     };
   },
-  methods: {
-    fetchData() {
-      axios
-        .get('https://5c711f4a0eddba001435b5d1.mockapi.io/land/1')
-        .then((response) => {
-          this.record = response.data;
-          this.loading = false;
-        })
-        .catch(error => console.log(error));
-    },
-  },
-  computed: {
-    date() {
-      return moment(this.record.date).format('dddd, MMMM Do YYYY');
-    },
-  },
+  mixins: [
+    searchMixin,
+  ],
   created() {
     this.fetchData();
   },
