@@ -7,11 +7,13 @@ import Router from 'vue-router';
 
 import Registrar from '@/registrar/Registrar.vue';
 import ViewLandRecords from '@/registrar/components/ViewLandRecords.vue';
+import AddLandRecord from '@/registrar/components/AddLandRecord.vue';
 /**
  * Client
  */
 
 import Client from '@/clients/Client.vue';
+import UserLandRecord from '@/clients/components/UserLandRecord.vue';
 
 Vue.use(Router);
 
@@ -23,10 +25,11 @@ export default new Router({
       path: '/client',
       component: Client,
       children: [
-        // {
-        //   path: '/',
-        //   component: ,
-        // }
+        {
+          path: 'landrecord',
+          name: 'landrecord',
+          component: UserLandRecord,
+        },
       ],
     },
     {
@@ -40,6 +43,11 @@ export default new Router({
           path: 'records',
           name: 'viewLandRecords',
           component: ViewLandRecords,
+        },
+        {
+          path: 'addrecord',
+          name: 'addrecord',
+          component: AddLandRecord,
         },
       ],
     },
