@@ -46,8 +46,8 @@
 
           </v-list>
         </v-card-text>
-        <v-card-actions>
-          <v-btn block color="green">List for Sale</v-btn>
+        <v-card-actions v-if="!record.forSale">
+          <v-btn block color="green" @click="listLand">List for Sale</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -58,6 +58,9 @@
 
 <script>
 import searchMixin from '@/mixins/search';
+import bank from '@/util/bank';
+import web3 from '@/util/web3';
+import compileDeed from '@/ethereum/build/Deed.json';
 
 export default {
   name: 'UserLandRecord',
@@ -66,6 +69,20 @@ export default {
       loading: true,
       titleNumber: null || this.$route.params.titleNumber,
     };
+  },
+  methods: {
+    async listLand() {
+      console.log('List Land')
+      const deedAddress = await bank.methods.lookUp(this.titleNumber).call();
+      const deed = await new web3.eth.Contract(
+        JSON.parse(compileDeed.interface),
+        deedAddress,
+      );
+      const sth = await deed.methods.listProperty().send({
+        from: this.$store.state.account[0],
+        gas: '5000000'
+      });
+    },
   },
   mixins: [
     searchMixin,
