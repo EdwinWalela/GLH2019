@@ -17,7 +17,6 @@
             </v-list-tile>
 
 
-
             <v-list-tile>
               <v-list-tile-title>
                 Owners
@@ -86,8 +85,8 @@ export default {
         date: transOwners.date,
         lawyers: transOwners.lawyers,
         registrar: transOwners.registar,
-        forSale: forSale
-      }
+        forSale,
+      };
     },
   },
   async created() {

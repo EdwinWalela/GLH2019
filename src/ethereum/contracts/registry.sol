@@ -92,7 +92,7 @@ contract Deed{
     uint public approxArea;
     uint public regMapSheetNo;
     
-    // bool public forSale;
+    bool public forSale;
     Ownership public owners;
     Ownership[] private prevOwners;
     Encumbarence[] private encumbarances;
@@ -130,6 +130,10 @@ contract Deed{
         return(res.owners,res.date,res.registar,res.lawyers);
     }
 
+    // restricted to owner
+    function listProperty() public restricted {
+        forSale = true;
+    }
     // restricted to owner
     function ownershipTransferRequest(string _to,string _nature,address _toAddress,string _lawyers) public restricted {
         // ensure no encumbarance
