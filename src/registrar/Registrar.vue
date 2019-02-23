@@ -77,7 +77,7 @@ export default {
   methods: {
     searchLand() {
       console.log('Searching land');
-      this.$router.push({ name: 'viewLandRecords' });
+      this.$router.push({ name: 'viewLandRecords', params: { titleNumber: this.search } });
     },
     addLandRecord() {
       this.$router.push({ name: 'addrecord' });

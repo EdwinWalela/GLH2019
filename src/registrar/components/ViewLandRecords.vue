@@ -13,22 +13,10 @@
               <v-list-tile-title>
                 Title Number
               </v-list-tile-title>
-              <v-list-tile-sub-title>{{ record.titleNo }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>1111</v-list-tile-sub-title>
             </v-list-tile>
 
-            <v-list-tile>
-              <v-list-tile-title>
-                Owner Address
-              </v-list-tile-title>
-              <v-list-tile-sub-title>{{ record.ownAddress }}</v-list-tile-sub-title>
-            </v-list-tile>
 
-            <v-list-tile>
-              <v-list-tile-title>
-                Sheet Number
-              </v-list-tile-title>
-              <v-list-tile-sub-title>{{ record.sheetNo }}</v-list-tile-sub-title>
-            </v-list-tile>
 
             <v-list-tile>
               <v-list-tile-title>
@@ -48,13 +36,13 @@
               <v-list-tile-title>
                 Date
               </v-list-tile-title>
-              <v-list-tile-sub-title>{{ date }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{ record.date }}</v-list-tile-sub-title>
             </v-list-tile>
 
           </v-list>
         </v-card-text>
-        <v-card-actions>
-          <v-btn block color="green">Approve Transer</v-btn>
+        <v-card-actions v-if="record.forSale">
+          <v-btn  block color="green">Approve Transer</v-btn>
         </v-card-actions>
 
       </v-card>
@@ -64,7 +52,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import bank from '@/util/bank';
+import web3 from '@/util/web3';
+import compileDeed from '@/ethereum/build/Deed.json';
 import moment from 'moment';
 
 export default {
@@ -74,25 +64,32 @@ export default {
       loading: true,
       record: null,
       moment,
+      titleNumber: null || this.$route.params.titleNumber,
     };
   },
   methods: {
-    fetchData() {
-      axios
-        .get('https://5c711f4a0eddba001435b5d1.mockapi.io/land/1')
-        .then((response) => {
-          this.record = response.data;
-          this.loading = false;
-        })
-        .catch(error => console.log(error));
+    async fetchData() {
+      console.log('Title:', this.titleNumber);
+      const deedAddress = await bank.methods.lookUp(this.titleNumber).call();
+      const deed = await new web3.eth.Contract(
+        JSON.parse(compileDeed.interface),
+        deedAddress,
+      );
+      console.log('Deed: ', deed);
+      console.log('Deed Addr', deedAddress);
+
+      const transOwners = await deed.methods.owners().call();
+      console.log(transOwners);
+      this.record = {
+        owners: transOwners.owners,
+        date: transOwners.date,
+        lawyers: transOwners.lawyers,
+        registrar: transOwners.registar,
+        forSale: true
+      }
     },
   },
-  computed: {
-    date() {
-      return moment(this.record.date).format('dddd, MMMM Do YYYY');
-    },
-  },
-  created() {
+  async created() {
     this.fetchData();
   },
 };
