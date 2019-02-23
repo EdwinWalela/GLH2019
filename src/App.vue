@@ -20,7 +20,8 @@ export default {
   },
   methods: {
     onComplete(data) {
-      console.log('MetaMask Data: ', data);
+      this.$store.commit('saveWeb3', data);
+      console.log('MetaMask Data saved to state: ', data);
     },
   },
 };
