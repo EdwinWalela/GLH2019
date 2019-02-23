@@ -7,23 +7,65 @@
             <h3 class="headline mb-0">Land Record</h3>
           </div>
         </v-card-title>
+        <v-card-text>
+          <v-list>
+            <v-list-tile>
+              <v-list-tile-title>
+                Title Number
+              </v-list-tile-title>
+              <v-list-tile-sub-title>{{ record.titleNo }}</v-list-tile-sub-title>
+            </v-list-tile>
 
-        <p> Title No: {{ record.titleNo }}</p>
-        <p> OwnerAddress: {{ record.ownAddress}}</p>
-        <p> Sheet No: {{ record.sheetNo}} </p>
-        <p> Owners: {{ record.owners }} </p>
-        <p> Registrar: {{ record.registrar }} </p>
-        <p> Lawyers: {{ record.lawyers }} </p>
-        <p> Date: {{ record.date }} </p>
+            <v-list-tile>
+              <v-list-tile-title>
+                Owner Address
+              </v-list-tile-title>
+              <v-list-tile-sub-title>{{ record.ownAddress }}</v-list-tile-sub-title>
+            </v-list-tile>
+
+            <v-list-tile>
+              <v-list-tile-title>
+                Sheet Number
+              </v-list-tile-title>
+              <v-list-tile-sub-title>{{ record.sheetNo }}</v-list-tile-sub-title>
+            </v-list-tile>
+
+            <v-list-tile>
+              <v-list-tile-title>
+                Owners
+              </v-list-tile-title>
+              <v-list-tile-sub-title>{{ record.owners }}</v-list-tile-sub-title>
+            </v-list-tile>
+
+            <v-list-tile>
+              <v-list-tile-title>
+                Lawyers
+              </v-list-tile-title>
+              <v-list-tile-sub-title>{{ record.lawyers }}</v-list-tile-sub-title>
+            </v-list-tile>
+
+            <v-list-tile>
+              <v-list-tile-title>
+                Date
+              </v-list-tile-title>
+              <v-list-tile-sub-title>{{ moment(record.date).format("dddd, MMMM Do YYYY") }}</v-list-tile-sub-title>
+            </v-list-tile>
+
+          </v-list>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn block color="green">Approve Transer</v-btn>
+        </v-card-actions>
 
       </v-card>
     </v-flex>
   </v-layout>
-  
+
 </template>
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 
 export default {
   name: 'ViewLandRecords',
@@ -31,20 +73,7 @@ export default {
     return {
       loading: true,
       record: null,
-      monthList: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ]
+      moment
     };
   },
   methods: {
@@ -60,9 +89,7 @@ export default {
   },
   computed: {
     date() {
-      return `${
-        this.monthList[this.record.date.getMonth()]
-      } ${this.record.date.getFullYear()}`;
+      this.record.date
     },
   },
   created() {
