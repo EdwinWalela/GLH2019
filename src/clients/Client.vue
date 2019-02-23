@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     searchLand() {
-      console.log('Searching land')
+      console.log('Searching land');
       this.$router.push({ name: 'landrecord' });
     },
   },

@@ -48,7 +48,7 @@
               <v-list-tile-title>
                 Date
               </v-list-tile-title>
-              <v-list-tile-sub-title>{{ moment(record.date).format("dddd, MMMM Do YYYY") }}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{ date }}</v-list-tile-sub-title>
             </v-list-tile>
 
           </v-list>
@@ -73,7 +73,7 @@ export default {
     return {
       loading: true,
       record: null,
-      moment
+      moment,
     };
   },
   methods: {
@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     date() {
-      this.record.date
+      return moment(this.record.date).format('dddd, MMMM Do YYYY');
     },
   },
   created() {
