@@ -1,14 +1,7 @@
 <template>
 <v-app>
-
-          <vue-metamask
-            @onComplete="onComplete"
-        ></vue-metamask>
-          <router-view>
-          </router-view>
-
-        
-
+  <vue-metamask @onComplete="onComplete"/>
+  <router-view/>
 </v-app>
 </template>
 
