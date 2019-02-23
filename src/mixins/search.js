@@ -28,6 +28,7 @@ export default {
         lawyers: transOwners.lawyers,
         registrar: transOwners.registar,
         forSale,
+        ownerAddress: transOwners.ownerAddress,
       };
     },
   },
