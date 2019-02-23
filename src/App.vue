@@ -1,13 +1,13 @@
 <template>
 <v-app>
 
-        <v-fade-transition appear>
-          <!-- <vue-metamask
+          <vue-metamask
             @onComplete="onComplete"
-        > -->
-          <router-view />
-          <!-- </vue-metamask> -->
-        </v-fade-transition>
+        ></vue-metamask>
+          <router-view>
+          </router-view>
+
+        
 
 </v-app>
 </template>
