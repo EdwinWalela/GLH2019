@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import Web3 from '@/util/web3';
+
 export default {
   name: 'Registrar',
   data() {
@@ -80,6 +82,13 @@ export default {
     addLandRecord() {
       this.$router.push({ name: 'addrecord' });
     },
+    async loadMeta() {
+      const account = await Web3.eth.getAccounts();
+      this.$store.commit('saveAccount', account);
+    },
+  },
+  async created() {
+    await this.loadMeta();
   },
 };
 </script>

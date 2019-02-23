@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    web3: null,
+    account: null,
   },
   mutations: {
-    saveWeb3(state, payload) {
-      state.web3 = payload;
+    saveAccount(state, payload) {
+      state.account = payload;
     },
   },
   actions: {
