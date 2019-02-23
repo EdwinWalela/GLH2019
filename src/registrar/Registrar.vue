@@ -1,5 +1,5 @@
 <template>
-        <v-app id="keep">
+        <v-app>
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -25,6 +25,7 @@
             class="my-3"
           ></v-divider>
           <v-list-tile
+          @click="addLandRecord"
           >
             <v-list-tile-action>
               <v-icon>add</v-icon>
@@ -32,18 +33,6 @@
             <v-list-tile-content>
               <v-list-tile-title class="grey--text">
                 Add Land Record
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-
-          <v-list-tile
-          >
-            <v-list-tile-action>
-              <v-icon>touch_app</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
-                Approve Transfer Requests
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -60,7 +49,7 @@
         label="Search"
         prepend-inner-icon="search"
         v-model="search"
-        v-on:keyup.enter="searchLand"
+        @keyup.native.enter="searchLand"
       ></v-text-field>
       <v-spacer></v-spacer>
     </v-toolbar>
@@ -84,12 +73,13 @@ export default {
     };
   },
   methods: {
-    landRecords() {
+    searchLand() {
+      console.log('Searching land')
       this.$router.push({ name: 'viewLandRecords' });
     },
-    searchLand(){
-        // GoTo Land Records display
-    }
+    addLandRecord() {
+      this.$router.push({ name: 'addrecord' });
+    },
   },
 };
 </script>
